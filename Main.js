@@ -13,7 +13,7 @@ window.requestAnimationFrame = function() {
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext('2d');
 
-var W = canvas.width = 300;
+var W = canvas.width = 500;
 var H = canvas.height = window.innerHeight;
 
 var vx = 0;
@@ -22,8 +22,14 @@ var vy = 0;
 var ax = 0;
 var ay = 0;
 
+
+
+
+
+
+
 // Friction Factor
-var friction = 0.5;
+var friction = 0.7;
 
 // Car
 var car = {
@@ -47,16 +53,35 @@ car.y = H - car.h - 30;
     window.requestAnimationFrame(drawFrame);
     ctx.clearRect(0, 0, W, H);
 
-    if( car.x < 0){
+    if( car.x < 0) {
+        ax = 0;
         vx = 0;
-        ax =0;
-    } else {
-        vx += ax;
+        car.x = 1;
+    }
+
+    if(car.x > W){
+        ax = 0;
+        vx = 0;
+        car.x = W - 1;
+    }
+
+    if(car.y < (1/4)*window.innerHeight){
+        ay = 0;
+        vy = 0;
+        car.y = (1/4)*window.innerHeight+1;
+    }
+
+    if(car.y > window.innerHeight-50){
+        ay = 0;
+        vy = 0;
+        car.y = window.innerHeight-51;
     }
 
 
 
+    vx += ax;
     vy += ay;
+
 
 
     // Know the speed first
