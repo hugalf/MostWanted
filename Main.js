@@ -1,6 +1,3 @@
-/**
- * Created by hugal on 03/03/2016.
- */
 // rAF
 window.requestAnimationFrame = function() {
     return window.requestAnimationFrame ||
@@ -50,8 +47,17 @@ car.y = H - car.h - 30;
     window.requestAnimationFrame(drawFrame);
     ctx.clearRect(0, 0, W, H);
 
-    vx += ax;
+    if( car.x < 0){
+        vx = 0;
+        ax =0;
+    } else {
+        vx += ax;
+    }
+
+
+
     vy += ay;
+
 
     // Know the speed first
     var speed = Math.sqrt(vx*vx + vy*vy);
